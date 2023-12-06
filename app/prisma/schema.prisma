@@ -14,7 +14,7 @@ model Image {
   id            String   @id @default(uuid())
   prompt        String
   revisedPrompt String   @map("revised_prompt")
-  url           String
+  key           String
   createdAt     DateTime @default(now()) @map("created_at")
 
   @@map("images")

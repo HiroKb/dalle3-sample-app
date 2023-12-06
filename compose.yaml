@@ -25,5 +25,29 @@ services:
       POSTGRES_INITDB_ARGS: '--encoding=UTF-8'
       POSTGRES_DB: app-dev
 
+  mc:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set minio http://minio:9000 user password;
+      mc mb minio/bucket;
+      mc anonymous set public minio/bucket;
+      "
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    volumes:
+      - minio-data:/data
+    command: "server /data --console-address :9090"
+    environment:
+      MINIO_ROOT_USER: user
+      MINIO_ROOT_PASSWORD: password
+
 volumes:
   db-data:
+  minio-data:
