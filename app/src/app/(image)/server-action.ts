@@ -39,6 +39,7 @@ export const generateImage = async (_prevState: any, formData: FormData) => {
       }
     })
   } catch (e) {
+    console.log(e)
     return {
       errors: {
         common: ['Internal server error']
