@@ -2,7 +2,6 @@
 
 import 'server-only'
 import OpenAI from "openai";
-import {S3Client} from "@aws-sdk/client-s3";
 import {Upload} from "@aws-sdk/lib-storage";
 import {StreamingBlobPayloadInputTypes} from "@smithy/types";
 import {z} from "zod";
@@ -10,6 +9,7 @@ import {redirect} from "next/navigation";
 import {revalidatePath} from "next/cache";
 
 import prisma from "@/lib/prisma";
+import {getS3Client} from "@/lib/s3-client";
 
 const generateImageSchema = z.object({
   prompt: z.string().min(1).max(1000),
@@ -91,18 +91,9 @@ const uploadImage = async (
   fileName: string = `${crypto.randomUUID()}${Date.now()}.png`,
   contentType: 'image/png' | 'image/jpeg' = 'image/png'
 ) => {
-  const s3Client = new S3Client({
-    region: process.env.STORAGE_REGION,
-    endpoint: process.env.STORAGE_ENDPOINT,
-    credentials: {
-      accessKeyId: String(process.env.STORAGE_ACCESS_KEY_ID),
-      secretAccessKey: String(process.env.STORAGE_SECRET_ACCESS_KEY)
-    },
-    forcePathStyle: process.env.NODE_ENV === 'development'
-  })
 
   const upload = new Upload({
-    client: s3Client,
+    client: getS3Client(),
     params: {
       Bucket: process.env.STORAGE_BUCKET_NAME,
       Key: fileName,

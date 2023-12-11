@@ -7,8 +7,9 @@ import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import {Dialog, DialogContent, DialogHeader, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import {generateImage} from "@/app/(image)/server-action";
-import GenerateButton from "@/app/(image)/_components/GenerateButton";
+import SubmitButton from "@/components/form/SubmitButton";
+
+import {generateImage} from "@/app/(image)/actions/generate-image";
 
 function GenerateImageModal() {
   const [state, formAction] = useFormState(generateImage, undefined)
@@ -38,7 +39,9 @@ function GenerateImageModal() {
           ))
           }
           <div className='flex justify-end mt-4'>
-            <GenerateButton/>
+            <SubmitButton>
+              Generate
+            </SubmitButton>
           </div>
         </form>
       </DialogContent>
