@@ -30,12 +30,8 @@ function GenerateImageModal() {
             name='prompt'
             className='mt-2'
           />
-          {state?.errors && 'prompt' in state.errors && state.errors.prompt?.map((error) => (
-            <p key={error} className='text-red-500 text-sm mt-2'>{error}</p>
-          ))
-          }
-          {state?.errors && 'common' in state.errors && state.errors.common?.map((error) => (
-            <p key={error} className='text-red-500 text-sm mt-2'>{error}</p>
+          {state?.messages && state.messages.map((message) => (
+            <p key={message} className='text-red-500 text-sm mt-2'>{message}</p>
           ))
           }
           <div className='flex justify-end mt-4'>

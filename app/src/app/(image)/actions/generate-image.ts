@@ -20,7 +20,7 @@ export const generateImage = async (_prevState: any, formData: FormData) => {
 
   if (!parseInputResult.success) {
     return {
-      errors: parseInputResult.error.flatten().fieldErrors
+      messages: parseInputResult.error.flatten().fieldErrors.prompt
     }
   }
 
@@ -41,9 +41,7 @@ export const generateImage = async (_prevState: any, formData: FormData) => {
   } catch (e) {
     console.log(e)
     return {
-      errors: {
-        common: ['Internal server error']
-      }
+      messages: ['Internal server error']
     }
   }
 
