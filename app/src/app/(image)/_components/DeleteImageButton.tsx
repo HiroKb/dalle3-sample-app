@@ -5,7 +5,7 @@ import {Image} from "@prisma/client";
 
 import SubmitButton from "@/components/form/SubmitButton";
 
-import {deleteImage} from "@/app/(image)/actions/delete-image";
+import {deleteImage} from "@/app/(image)/_actions/delete-image";
 
 type Props = {
   image: Image

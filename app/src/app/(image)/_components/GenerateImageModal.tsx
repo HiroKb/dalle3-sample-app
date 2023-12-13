@@ -9,7 +9,7 @@ import {Dialog, DialogContent, DialogHeader, DialogTrigger} from "@/components/u
 import {Button} from "@/components/ui/button";
 import SubmitButton from "@/components/form/SubmitButton";
 
-import {generateImage} from "@/app/(image)/actions/generate-image";
+import {generateImage} from "@/app/(image)/_actions/generate-image";
 
 function GenerateImageModal() {
   const [state, formAction] = useFormState(generateImage, undefined)
