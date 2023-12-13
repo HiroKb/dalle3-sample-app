@@ -66,7 +66,9 @@ const generateImageByDalle3 = async (prompt: string) => {
     prompt: prompt,
     n: 1,
     size: '1024x1024',
-    quality: 'standard'
+    quality: 'standard',
+    response_format: 'url',
+    style: 'vivid',
   })
 
   return openAIImageSchema.parse(generatedResponse.data[0])
